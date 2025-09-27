@@ -14,6 +14,7 @@ public:
     //Constructors
     User();
     User(const string&, const double&, const string&, const double&, const int&);
+    User(const string&, const double&, const string&);
     //Destructor
     ~User();
     //Getters
@@ -40,6 +41,7 @@ public:
 };
 User::User() : name("Jane Doe"), weight(0), gender("N/A"), waterLevel(0.0), drinksPerDay(0) {}
 User::User(const string& n, const double& w, const string& g, const double& wl, const int& d) : name(n), weight(w), gender(g), waterLevel(wl), drinksPerDay(d) {}
+User::User(const string& n,const double& w, const string& g): name(n), weight(w), gender(g), waterLevel(0.0), drinksPerDay(0) {}
 User::~User() {}
 //Getters
 string User::getName() const
@@ -118,10 +120,14 @@ int User::drinkMore()const
 }
 int main(int argc, char* argv[]) {
     string name = argc > 1 ? argv[1] : "Jane Doe";
-    double weight = argc > 2 ? stod(argv[2]) : 60;
+    double weight = argc > 2 ? stod(argv[2]) : 0;
     string gender = argc > 3 ? argv[3] : "N/A";
+    double waterLevel = argc > 4 ? stod(argv[4]) : 0.0;
+    int drinksPerDay = argc > 5 ? stoi(argv[5]) : 0;
+    User user(name, weight, gender, waterLevel, drinksPerDay);
+    User user (name, weight, gender); // new user
 
-    User user(name, weight, gender, 0.0, 0);
+    // output JSON to node.js
     user.printInfo(cout);
 
     return 0;
