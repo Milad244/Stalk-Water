@@ -24,7 +24,7 @@ function navbar_setup(){
         if (!dropdown.matches(':hover')) {
             dropdown.style.display = 'none';
         }
-    }, 200);
+    }, 300);
     });
 }
 
