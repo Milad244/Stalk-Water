@@ -124,7 +124,7 @@ int main(int argc, char* argv[]) {
     string gender = argc > 3 ? argv[3] : "N/A";
     double waterLevel = argc > 4 ? stod(argv[4]) : 0.0;
     int drinksPerDay = argc > 5 ? stoi(argv[5]) : 0;
-    User user(name, weight, gender, waterLevel, drinksPerDay);
+    User user(name, weight, gender, waterLevel, drinksPerDay); // existing user
     User user (name, weight, gender); // new user
 
     // output JSON to node.js
