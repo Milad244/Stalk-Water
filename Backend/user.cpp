@@ -114,7 +114,7 @@ ostream& operator<<(ostream& cout, const User& u)
 }
 int drinkMore(User u)
 {
-    int print = u.getWeight() * 30;
+    int print = u.getWeight() * 30 - u.getWaterLevel();
     cout << "You need to drink more" << print << "ml to be healthier !" << endl;
 }
 int main() {
@@ -123,7 +123,7 @@ int main() {
     cin >> u1;
 
     drinkMore(u1);
-    
+
     u1.~User();
 
     system("Pause");
