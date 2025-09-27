@@ -35,7 +35,7 @@ public:
     friend istream& operator>>(istream&, User&);
     friend ostream& operator<<(ostream&, const User&);
 
-    int drinkMore(User u); //returns how much water need to drink more
+    void drinkMore(User u); //returns how much water need to drink more
 
 };
 User::User() : name("N/A"), weight(0), gender("N/A"), waterLevel(0.0), drinksPerDay(0) {}
@@ -99,7 +99,7 @@ void User::printInfo(ostream& cout) const
     cout << "\tYour Name is " << name << endl;
     cout << "\tYour Weight is " << weight << "kg" << endl;
     cout << "\tYour Gender is " << gender << endl;
-    cout << "\tYour WaterLevel is " << waterLevel << endl;
+    cout << "\tYour WaterLevel is " << waterLevel << "ml" << endl;
     cout << "\tYou Drinks" << drinksPerDay << "ml in a day" << endl;
 }
 istream& operator>>(istream &cin, User& u)
@@ -112,7 +112,7 @@ ostream& operator<<(ostream& cout, const User& u)
     u.printInfo(cout);
     return cout;
 }
-int drinkMore(User u)
+void drinkMore(User u)
 {
     int print = u.getWeight() * 30 - u.getWaterLevel();
     cout << "You need to drink more" << print << "ml to be healthier !" << endl;
