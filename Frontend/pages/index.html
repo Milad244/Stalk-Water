@@ -7,6 +7,7 @@
     <script src="../app.js"></script>
     <title>Stalk Water</title>
 </head>
+
 <body>
     <nav class="navbar">
         <!-- Left - Hamburger -->
@@ -24,16 +25,46 @@
         <img src="https://via.placeholder.com/40" alt="Profile">
         </div>
 
-        <!-- Profile Dropdown -->
+        <!-- Dropdown -->
         <div class="dropdown" id="dropdown">
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
+        <a href="index.html">Stalk Water</a>
+        <a href="map.html">Stalk Water Map</a>
+        <a href="#">Water History</a>
         </div>
     </nav>
+
+    <div id="new-user-block">
+        <div class="new-user-page">
+            <form>
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name" placeholder="Enter your name"><br><br>
+
+                <label for="weight">Weight (kg):</label><br>
+                <input type="number" id="weight" name="weight" placeholder="Enter your weight"><br><br>
+
+                <label for="gender">Gender:</label><br>
+                <select id="gender" name="gender">
+                <option value="">--Select--</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+                </select><br><br>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+
     <main>
-        <div> 
-            <h1>Hello Team STALKERS!</h1>
+        <div class="day-water-block hidden">
+            <div class="day-water">
+                <p>You have drank: 2 liters</p>
+                <p>0.25 liters left to drink for today</p>
+            </div>
+            <div class="day-water-vis">
+                <img src="../assets/Full_T.png" alt="Water">
+            </div>
         </div>
     </main>
 </body>
