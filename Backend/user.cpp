@@ -35,10 +35,10 @@ public:
     friend istream& operator>>(istream&, User&);
     friend ostream& operator<<(ostream&, const User&);
 
-    void drinkMore(User u); //returns how much water need to drink more
+    int drinkMore()const; //returns how much water need to drink more
 
 };
-User::User() : name("N/A"), weight(0), gender("N/A"), waterLevel(0.0), drinksPerDay(0) {}
+User::User() : name("Jane Doe"), weight(0), gender("N/A"), waterLevel(0.0), drinksPerDay(0) {}
 User::User(const string& n, const double& w, const string& g, const double& wl, const int& d) : name(n), weight(w), gender(g), waterLevel(wl), drinksPerDay(d) {}
 User::~User() {}
 //Getters
@@ -93,14 +93,14 @@ void User::readInfo(istream& cin)
     cout << "\tEnter your gender: ";
     cin >> gender;
 }
-void User::printInfo(ostream& cout) const
+void User::printInfo(ostream& out) const
 {
-    cout << endl;
-    cout << "\tYour Name is " << name << endl;
-    cout << "\tYour Weight is " << weight << "kg" << endl;
-    cout << "\tYour Gender is " << gender << endl;
-    cout << "\tYour WaterLevel is " << waterLevel << "ml" << endl;
-    cout << "\tYou Drinks" << drinksPerDay << "ml in a day" << endl;
+    out << "{"
+        << "\"name\": \"" << name << "\", "
+        << "\"weight\": " << weight << ", "
+        << "\"gender\": \"" << gender << "\", "
+        << "\"waterNeeded\": " << drinkMore()
+        << "}";
 }
 istream& operator>>(istream &cin, User& u)
 {
@@ -112,22 +112,17 @@ ostream& operator<<(ostream& cout, const User& u)
     u.printInfo(cout);
     return cout;
 }
-void drinkMore(User u)
+int User::drinkMore()const
 {
-    int print = u.getWeight() * 30 - u.getWaterLevel();
-    cout << "You need to drink more" << print << "ml to be healthier !" << endl;
+    return static_cast<int>(getWeight() * 30); // returns ml
 }
-int main() {
-    User u1;
-    cout << "Enter an User";
-    cin >> u1;
+int main(int argc, char* argv[]) {
+    string name = argc > 1 ? argv[1] : "Jane Doe";
+    double weight = argc > 2 ? stod(argv[2]) : 60;
+    string gender = argc > 3 ? argv[3] : "N/A";
 
-    drinkMore(u1);
+    User user(name, weight, gender, 0.0, 0);
+    user.printInfo(cout);
 
-    u1.~User();
-
-    system("Pause");
     return 0;
-
-    
 }
