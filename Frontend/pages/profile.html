@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/index.css">
+    <script src="../app.js"></script>
+    <title>Stalk Water</title>
+</head>
+
+<body>
+    <nav class="navbar">
+        <!-- Left - Hamburger -->
+        <div class="menu-btn" id="menu-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+        </div>
+        <!-- Dropdown -->
+        <div class="dropdown" id="dropdown">
+        <a href="index.html">Stalk Water</a>
+        <a href="map.html">Stalk Water Map</a>
+        <a href="#">Water History</a>
+        </div>
+
+        <!-- Middle - Title -->
+        <div class="title">Stalk Water</div>
+
+        <!-- Right - Profile -->
+        <a href="profile.html">
+        <div class="profile" id="profile-btn">
+            <img src="../assets/Happy.png" alt="Profile">
+        </div>
+        </a>
+        
+    </nav>
+
+    <div id="profile-block">
+        <div class="profile-page">
+            <h2>User Profile</h2>
+            <form>
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name" placeholder="Enter your name"><br><br>
+
+                <label for="weight">Weight (kg):</label><br>
+                <input type="number" id="weight" name="weight" placeholder="Enter your weight"><br><br>
+
+                <label for="gender">Gender:</label><br>
+                <select id="gender" name="gender">
+                <option value="">--Select--</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+                </select><br><br>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+
+    <main>
+        <div class="day-water-block hidden">
+            <div class="day-water">
+                <p>You have drank: 2 liters</p>
+                <p>0.25 liters left to drink for today</p>
+            </div>
+            <div class="day-water-vis">
+                <img src="../assets/Full_T.png" alt="Water">
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>
+            Project: <a href="https://github.com/Milad244/Stalk-Water" target="_blank">Stalk-Water</a>
+        </p>
+        <p>
+            Team Members: 
+            <a href="https://github.com/neallu06" target="_blank">Neal</a> | 
+            <a href="https://github.com/praisej04" target="_blank">Praise</a> | 
+            <a href="https://github.com/grace030338" target="_blank">Grace</a> | 
+            <a href="https://github.com/Milad244" target="_blank">Milad</a>
+        </p>
+    </footer>
+</body>
+</html>
