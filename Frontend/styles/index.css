@@ -75,7 +75,7 @@ body {
 
 /* New User */
 #new-user-block{
-    background: #f4f6f8;
+    background:  #152238;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -157,11 +157,11 @@ main .day-water-block .day-water{
 
 /* Footer */
 footer {
-    background-color: #f4f6f8;
+    background-color:  #23395D;
     padding: 20px;
     text-align: center;
     font-size: 16px;
-    color: #333;
+    color: #FABB00;
     border-top: 1px solid #ddd;
     position: relative;
     bottom: 0;
@@ -170,7 +170,7 @@ footer {
   }
 
   footer a {
-    color: #007bff;
+    color: #f4f6f8;
     text-decoration: none;
     margin: 0 5px;
   }
