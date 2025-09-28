@@ -24,17 +24,29 @@ app.post('/users', (req, res) => {
   const cppPath = path.join(__dirname, 'Backend/output', process.platform === 'win32' ? 'user.exe' : 'user');
 
   execFile(cppPath, [name, weight, gender], (error, stdout, stderr) => {
-    if (error) return res.status(500).send('Error running C++ program');
+    if (error) {
+      console.error('C++ execution error:', error);
+      console.error('stderr:', stderr);
+
+      return res.status(500).json({
+        error: 'Error running C++ program',
+        details: stderr || error.message
+      });
+    }
 
     try {
       const data = JSON.parse(stdout);
       res.json(data);
     } catch (err) {
       console.error('Invalid C++ output:', stdout);
-      res.status(500).send('Invalid backend response');
+      res.status(500).json({
+        error: 'Invalid backend response',
+        raw: stdout
+      });
     }
   });
 });
+
 
 // Start server
 app.listen(8080, () => {

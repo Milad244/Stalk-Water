@@ -12,3 +12,44 @@ body {
     width: 320px;
   }
 
+/* Profile Page */
+#profile-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh; /* fill most of the screen */
+    background-color: #f4f6f8;
+    padding: 20px;
+}
+
+.profile-page {
+    background-color: #fff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    width: 350px;
+    max-width: 90%;
+    text-align: left;
+    font-family: Arial, sans-serif;
+}
+
+.profile-page h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.profile-page label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+    font-size: 16px;
+}
+
+.profile-page p {
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #333;
+}
