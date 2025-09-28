@@ -10,11 +10,13 @@ private:
     string gender;
     double waterLevel; 
     int drinksPerDay;
+    WaterLog logs[100];
+    int logCount;
+
 public:
     //Constructors
     User();
     User(const string&, const double&, const string&, const double&, const int&);
-    User(const string&, const double&, const string&);
     //Destructor
     ~User();
     //Getters
@@ -35,14 +37,22 @@ public:
     //Friend functions
     friend istream& operator>>(istream&, User&);
     friend ostream& operator<<(ostream&, const User&);
+    void addDrink(const string& date, double ml);
+    void drinkMore(User u); //returns how much water need to drink more
 
-    int drinkMore()const; //returns how much water need to drink more
 
 };
-User::User() : name("Jane Doe"), weight(0), gender("N/A"), waterLevel(0.0), drinksPerDay(0) {}
+
+struct WaterLog
+{
+    string date;
+    double amount;
+};
+
+User::User() : name("N/A"), weight(0), gender("N/A"), waterLevel(0.0), drinksPerDay(0) {}
 User::User(const string& n, const double& w, const string& g, const double& wl, const int& d) : name(n), weight(w), gender(g), waterLevel(wl), drinksPerDay(d) {}
-User::User(const string& n,const double& w, const string& g): name(n), weight(w), gender(g), waterLevel(0.0), drinksPerDay(0) {}
 User::~User() {}
+
 //Getters
 string User::getName() const
 {
@@ -58,12 +68,17 @@ string User::getGender() const
 }
 double User::getWaterLevel() const
 {
-    return waterLevel;
+    double total = 0;
+    for (int i = 0; i < logCount; i++) {
+        total += logs[i].amount;
+    }
+    return total;
 }
 int User::getDrinksPerDay() const
 {
-    return drinksPerDay;
+    return logCount;
 }
+
 //Setters
 void User::setName(const string& n)
 {
@@ -95,14 +110,14 @@ void User::readInfo(istream& cin)
     cout << "\tEnter your gender: ";
     cin >> gender;
 }
-void User::printInfo(ostream& out) const
+void User::printInfo(ostream& cout) const
 {
-    out << "{"
-        << "\"name\": \"" << name << "\", "
-        << "\"weight\": " << weight << ", "
-        << "\"gender\": \"" << gender << "\", "
-        << "\"waterNeeded\": " << drinkMore()
-        << "}";
+    cout << endl;
+    cout << "\tYour Name is " << name << endl;
+    cout << "\tYour Weight is " << weight << "kg" << endl;
+    cout << "\tYour Gender is " << gender << endl;
+    cout << "\tYour WaterLevel is " << waterLevel << "ml" << endl;
+    cout << "\tYou Drinks" << drinksPerDay << "ml in a day" << endl;
 }
 istream& operator>>(istream &cin, User& u)
 {
@@ -114,21 +129,35 @@ ostream& operator<<(ostream& cout, const User& u)
     u.printInfo(cout);
     return cout;
 }
-int User::drinkMore()const
+
+void User::addDrink(const string &date, double ml)
 {
-    return static_cast<int>(getWeight() * 30); // returns ml
+    if (logCount < 100) { // check capacity
+        logs[logCount].date = date;
+        logs[logCount].amount = ml;
+        logCount++;
+    } else {
+        cout << "Log is full! Cannot add more than 100 entries." << endl;
+    }
 }
-int main(int argc, char* argv[]) {
-    string name = argc > 1 ? argv[1] : "Jane Doe";
-    double weight = argc > 2 ? stod(argv[2]) : 0;
-    string gender = argc > 3 ? argv[3] : "N/A";
-    double waterLevel = argc > 4 ? stod(argv[4]) : 0.0;
-    int drinksPerDay = argc > 5 ? stoi(argv[5]) : 0;
-    User user(name, weight, gender, waterLevel, drinksPerDay); // existing user
-    User user (name, weight, gender); // new user
+void drinkMore(User u)
+{
+    int print = u.getWeight() * 30 - u.getWaterLevel();
+    cout << "You need to drink more" << print << "ml to be healthier !" << endl;
+}
 
-    // output JSON to node.js
-    user.printInfo(cout);
 
+int main() {
+    User u1;
+    cout << "Enter an User";
+    cin >> u1;
+
+    drinkMore(u1);
+
+    u1.~User();
+
+    system("Pause");
     return 0;
+
+    
 }
