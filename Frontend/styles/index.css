@@ -1,6 +1,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
+    background: #16294E;
 }
 
 .hidden {
@@ -13,7 +14,7 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 12px 16px;
-    background: #fff;
+    background: #526FA9;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 .menu-btn {
