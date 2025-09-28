@@ -48,8 +48,11 @@
         const existingUser = localStorage.getItem('user');
 
         const new_user_block = document.getElementById("new-user-block");
+        new_user_block.classList.remove('hidden');
         const day_water_block = document.getElementById("day-water-block");
+        day_water_block.classList.add('hidden');
         const main = document.getElementById("main-block");
+        main.classList.add('hidden');
 
         if (existingUser) {
             const user = JSON.parse(existingUser);
