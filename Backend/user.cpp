@@ -2,6 +2,12 @@
 #include <string>
 using namespace std;
 
+struct WaterLog
+{
+    string date;
+    double amount;
+};
+
 class User
 {
 private:
@@ -42,12 +48,6 @@ public:
     int drinkMore()const; //returns how much water need to drink more
 
 
-};
-
-struct WaterLog
-{
-    string date;
-    double amount;
 };
 
 User::User() : name("N/A"), weight(0), gender("N/A"), waterLevel(0.0), drinksPerDay(0) {}
@@ -112,14 +112,13 @@ void User::readInfo(istream& cin)
     cout << "\tEnter your gender: ";
     cin >> gender;
 }
-void User::printInfo(ostream& cout) const
-{
-    cout << endl;
-    cout << "\tYour Name is " << name << endl;
-    cout << "\tYour Weight is " << weight << "kg" << endl;
-    cout << "\tYour Gender is " << gender << endl;
-    cout << "\tYour WaterLevel is " << waterLevel << "ml" << endl;
-    cout << "\tYou Drinks" << drinksPerDay << "ml in a day" << endl;
+void User::printInfo(ostream& cout) const {
+    cout << "{"
+         << "\"name\":\"" << name << "\","
+         << "\"weight\":" << weight << ","
+         << "\"gender\":\"" << gender << "\","
+         << "\"waterNeeded\":" << drinkMore()
+         << "}";
 }
 istream& operator>>(istream &cin, User& u)
 {
@@ -154,7 +153,7 @@ int main(int argc, char* argv[]) {
     string gender = argc > 3 ? argv[3] : "N/A";
     double waterLevel = argc > 4 ? stod(argv[4]) : 0.0;
     int drinksPerDay = argc > 5 ? stoi(argv[5]) : 0;
-    User user(name, weight, gender, waterLevel, drinksPerDay); // existing user
+    //User user(name, weight, gender, waterLevel, drinksPerDay); // existing user
     User user (name, weight, gender); // new user
 
     // output JSON to node.js
