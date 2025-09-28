@@ -52,7 +52,6 @@ public:
 
 User::User() : name("N/A"), weight(0), gender("N/A"), waterLevel(0.0), drinksPerDay(0) {}
 User::User(const string& n, const double& w, const string& g, const double& wl, const int& d) : name(n), weight(w), gender(g), waterLevel(wl), drinksPerDay(d) {}
-User::User (const string& n, const double& w, const string& g):  name(n), weight(w), gender(g){};
 User::~User() {}
 
 //Getters
@@ -144,7 +143,9 @@ void User::addDrink(const string &date, double ml)
 
 int User::drinkMore()const
 {
-    return static_cast<int>(getWeight() * 30); // returns ml
+    int recommended = static_cast<int>(weight*30);
+    int current = static_cast<int>(getWaterLevel());
+    return max(0,recommended-current);
 }
 
 int main(int argc, char* argv[]) {
