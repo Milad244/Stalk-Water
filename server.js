@@ -3,39 +3,37 @@ const { execFile } = require('child_process');
 const path = require('path');
 
 const app = express();
-// Parse JSON bodies
-app.use(express.json());
 
-// Parse URL-encoded bodies (optional, for forms)
+// Built-in body parsers
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve frontend
-app.use(express.static(path.join(__dirname, 'Frontend')));
+// Serve static folders
+app.use('/pages', express.static(path.join(__dirname, 'Frontend/pages')));
+app.use('/styles', express.static(path.join(__dirname, 'Frontend/styles')));
+app.use('/assets', express.static(path.join(__dirname, 'Frontend/assets')));
 
-// Handle POST request to backend (C++)
+// Serve index.html at root
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'Frontend/pages/index.html'));
+});
+
+// POST to C++ backend
 app.post('/users', (req, res) => {
   const { name, weight, gender } = req.body;
+  const cppPath = path.join(__dirname, 'Backend/output', process.platform === 'win32' ? 'user.exe' : 'user');
 
-  // Call the compiled C++ program
-  execFile(path.join(__dirname, 'Backend/output', process.platform === 'win32' ? 'user.exe' : 'user'),
-   [name, weight, gender], (error, stdout, stderr) => {
-    if (error) {
-      console.error('Error executing C++:', error);
-      return res.status(500).send('Error running C++ program');
-    }
+  execFile(cppPath, [name, weight, gender], (error, stdout, stderr) => {
+    if (error) return res.status(500).send('Error running C++ program');
+
     try {
       const data = JSON.parse(stdout);
       res.json(data);
     } catch (err) {
-      console.error('Failed to parse C++ output:', err, stdout);
-      res.status(500).send('Invalid C++ output');
+      console.error('Invalid C++ output:', stdout);
+      res.status(500).send('Invalid backend response');
     }
   });
-});
-
-// Default route -> serve index.html
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'Frontend/pages/index.html'));
 });
 
 // Start server
